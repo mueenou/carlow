@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../model/User');
+const Car = require('../model/Car');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const {registerValidation, loginValidation} = require('../validation');
@@ -49,6 +50,18 @@ router.post('/login', async (req, res) => {
     // Create and assign token
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
     res.status(200).header('auth-token', token).send({token: token});
+})
+
+router.get('/cars', (req, res) => {
+    // LETS VALIDATE FIRST
+    Car.find(function(err,cars) {
+      if(err) {
+        console.log(err);
+      }
+      else {
+        res.send(cars);
+      }
+    });
 })
 
 module.exports = router;

@@ -7,6 +7,7 @@ const app = express();
 // Import Routes
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/post');
+// const carRoute = require('./routes/cars');
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use(
     
     
     // Routes Middlewares
+// app.use('/api/cars', carRoute);
 app.use('/api/user', authRoute);
 app.use('/api/posts', postRoute);
 
